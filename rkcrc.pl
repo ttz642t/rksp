@@ -40,7 +40,7 @@ sub usage(){
 
     This program creates a rockchip compliant PARM or KRNL file
 
-	usage: $0 [-k|-p] -i infile -o outfile
+	  usage: $0 [-k|-p|-b] -i infile -o outfile
 
      -c           : Copyright banner
      -h           : this (help) message
