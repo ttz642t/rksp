@@ -1,0 +1,4 @@
+The tools in this collection are for use with rk2918 devices using the
+flash write interface and the adb interface.
+
+Initially the tool support writing of images to tablets.
