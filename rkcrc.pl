@@ -121,7 +121,7 @@ if($opt{p}){
 }elsif($opt{k}){
   syswrite OUT, "KRNL";
 }elsif($opt{b}){
-	syswrite OUT, "BOOT";
+  syswrite OUT, "BOOT";
 }else{
   usage();
   exit;
