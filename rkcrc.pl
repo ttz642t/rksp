@@ -44,6 +44,7 @@ sub usage(){
 
      -c           : Copyright banner
      -h           : this (help) message
+     -b           : create a BOOT type file
      -k           : create a KRNL type file
      -p           : create a PARM type file
      -i infile    : file to calculate length, crc & prefix with type
@@ -57,7 +58,7 @@ EOF
 
 sub options(){
   use Getopt::Std;
-  my $opt_string = 'hckpi:o:';
+  my $opt_string = 'hckpbi:o:';
   getopts( "$opt_string", \%opt ) or usage();
   if($opt{c}){copyright();}
   if(! $opt{o}){print "No output file specified\n";}
@@ -118,7 +119,9 @@ open (OUT, ">$opt{o}") or die "can't open $filename\n";
 if($opt{p}){
   syswrite OUT, "PARM";
 }elsif($opt{k}){
-	syswrite OUT, "KRNL";
+  syswrite OUT, "KRNL";
+}elsif($opt{b}){
+	syswrite OUT, "BOOT";
 }else{
   usage();
   exit;
