@@ -154,7 +154,6 @@ sub usage(){
 
      -c           : Copyright banner
      -h           : this (help) message
-     -o outfile   : resulting file
 
     example: $0 -h
 
