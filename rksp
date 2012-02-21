@@ -295,7 +295,6 @@ my $parm = $_[0];
     $lines[$i] =~ s/[\x00-\x1F]//g; #remove control codes
     if($lines[$i] =~ /^CMDLINE:/){
       my ($tag,$cmdline,$rk29xxnand) = split(/:/,$lines[$i]);
-#      print "Partitions: $rk29xxnand\n\n";
       my @mtd = split(/,/,$rk29xxnand);
       for(my $j=0;$j<($#mtd+1);$j++){
         my $i1=index($mtd[$j],"@");
