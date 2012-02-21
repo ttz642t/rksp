@@ -96,6 +96,34 @@ EOF
 
 
 ########################################################################
+# Cooking menu
+########################################################################
+sub cookermenu(){
+my $optn=-1;
+  while($optn < 0 || $optn > 2){
+    print STDERR << "EOF";
+    
+1) Unpack images (boot.img, system.img) into directories
+2) Repack images (from directories)
+0) Return to previous menu
+EOF
+    print "Options ? ";
+    $optn = <>;
+    chomp $optn;
+    if(length($optn)==1){
+      $optn = ord($optn)-ord('0');
+    }else{
+      $optn=-1;
+    }
+  }
+  return $optn;
+}
+
+
+
+
+
+########################################################################
 # getCONFIG
 ########################################################################
 sub getCONFIG($){
@@ -536,5 +564,14 @@ while($optn != 0){
     print "Create parameters from parameter (packed & crc)...\n";
   }elsif($optn == 6){
     print "ROM cooking - be patient, comming soon . . .\n\n\n";
+    my $cook = -1;
+    while($cook != 0){
+      $cook = cookermenu();
+      if($cook == 1){
+        print "Unpack images (boot.img, system.img) into directories ...\n";
+      }elsif($cook == 2){
+        print "Repack images (from directories) ...\n";
+      }
+    }
   }
 }
