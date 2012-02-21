@@ -1,8 +1,6 @@
 #!/usr/bin/perl
 # Copyright (C) 2012 ttz642t\@gmail.com
-# Version 1.01 20120218
-#				- Added BOOT type to rkcrc
-# Version 1.00 20120218
+
 
 use warnings;
 use strict;
@@ -157,6 +155,10 @@ sub usage(){
 
     example: $0 -h
 
+Assumptions:
+ - This program was invoked from within the image directory
+ - The plain text "parameter" file exists and will be packed according to
+   rockchip format during flash download and into the file "parameters".
 EOF
 }
 
