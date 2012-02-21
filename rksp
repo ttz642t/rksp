@@ -9,7 +9,7 @@ use strict;
 use DB_File;# load database module
 use vars qw/ %opt /;
 
-my $CONFIGFILE = $ENV{HOME}."/.rksp.conf";#Config file is in current directory
+my $CONFIGFILE = $ENV{HOME}."/.rksp.conf";  #Config file is in home directory
 
 
 #Global variables
@@ -17,13 +17,13 @@ my $rkflashtool;
 my $adb;
 my $apps;
 
-my $progbar ="========"; $progbar.=$progbar; $progbar.=$progbar; $progbar.=$progbar;
+my $progbar = "=" x 64;
 
 my %imgsize;
 my %imgoffset;          
 my %idblks;
 
-#Order to write partitions
+#Order in which to write partitions.
 $idblks{1}="misc";
 $idblks{2}="kernel";
 $idblks{3}="boot";
@@ -130,7 +130,7 @@ my ($edit) = @_;
     print "Path to apk's: ",$CONFIG{apps},"  ? ";
     $rply=<>;chomp $rply;if(length($rply)>0){$CONFIG{apps}=$rply;}
     while(! -d "$CONFIG{apps}"){
-      print "Directory for favorite apps: ";
+      print "Directory for favourite apps: ";
       $CONFIG{apps} = <>;
       chomp $CONFIG{apps};
     }
@@ -275,7 +275,7 @@ abort:
 
 
 ########################################################################
-# PARSE PARAMETER file
+# Parse PARAMETER file
 ########################################################################
 sub parse_parameters($){
 my @lines;
@@ -353,10 +353,7 @@ sub readflash($ $ $){
 sub eraseIDB(){
 my $i=0;
 my $eraseIDB = "/tmp/eraseIDB".$$;
-my $FF=chr(255);
-  $FF=$FF.$FF.$FF.$FF.$FF.$FF.$FF.$FF;
-  $FF=$FF.$FF.$FF.$FF.$FF.$FF.$FF.$FF;
-  $FF=$FF.$FF.$FF.$FF.$FF.$FF.$FF.$FF;
+my $FF=chr(255) x 512;
   open(TABLET,">$eraseIDB");
   for($i=0;$i<8192;$i++){
     syswrite TABLET,$FF,512;
