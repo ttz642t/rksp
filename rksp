@@ -121,8 +121,6 @@ EOF
 
 
 
-
-
 ########################################################################
 # getCONFIG
 ########################################################################
@@ -500,10 +498,10 @@ sub installapps(){
   if(adbcheckconnected()==1){
     print "Reading apps from: $apps\n";
     opendir(APPS, "$apps");
-    my @thefiles = readdir(APPS);
+    my @thefiles = sort(readdir(APPS));
     closedir(APPS); 
     foreach my $f (@thefiles){
-      if((lc $f) =~ /\.apk$/){
+      if(((lc $f) =~ /\.apk$/) && ((lc $f) !~ /^superuser/)){
         print "Install: $apps/$f\n";
         system "$adb install '$apps/$f'";
       }
