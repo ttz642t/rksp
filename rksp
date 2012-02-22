@@ -129,6 +129,12 @@ my %CONFIG;
 my $rply;
 my ($edit) = @_;
   tie %CONFIG, "DB_File", $CONFIGFILE;
+  if($edit==2){
+    $CONFIG{rkflashtool}="";
+    $CONFIG{adb}="";
+    $CONFIG{apps}="";
+    $edit=1;
+  }
   if($edit==1){
     print "To accept a path press return, otherwise enter correct(ed) directory path\n\n";
     #
@@ -523,7 +529,12 @@ print "rksp tablet flasher, Copyright (C)2012 ttz642t\@gmail.com\n\n";
 options();
 
 print "Reading config file...\n";
-getCONFIG(0);
+
+if(-f $CONFIGFILE){
+  getCONFIG(0);
+}else{
+  getCONFIG(2);#no config file
+}
 
 print "adb path is: $adb\n";
 print "rkflashtool path is: $rkflashtool\n";
