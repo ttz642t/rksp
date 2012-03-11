@@ -76,9 +76,10 @@ my $optn=-1;
 1) Edit paths
 2) Flash tablet
 3) Reboot tablet
-4) Install favorite apps
-5) Create parameters from parameter
-6) ROM cooking (coming soon)...
+4) Backup apps on tablet
+5) Install favorite apps
+6) Create parameters from parameter
+7) ROM cooking (coming soon)...
 0) Exit
 EOF
     print "Options ? ";
@@ -513,8 +514,22 @@ sub installapps(){
       }
 	}
   }else{
-    print "Can't install apps...\n";
+    print "Can't install apps, can't access adb...\n";
   }
+}
+
+
+
+########################################################################
+# backupapps
+########################################################################
+sub backupapps(){
+  if(adbcheckconnected()==1){
+		system "$adb pull /data/app $apps/";
+		system "$adb pull /system/sd/ap $apps/";
+  }else{
+    print "Can't backup apps, can't access adb...\n";
+	}
 }
 
 
@@ -567,11 +582,14 @@ while($optn != 0){
       reboottablet();
 	}
   }elsif($optn == 4){
+    print "Backup apps on tablet...\n";
+    backupapps();
+  }elsif($optn == 5){
     print "Install favorite apps...\n";
     installapps();
-  }elsif($optn == 5){
-    print "Create parameters from parameter (packed & crc)...\n";
   }elsif($optn == 6){
+    print "Create parameters from parameter (packed & crc)...\n";
+  }elsif($optn == 7){
     print "ROM cooking - be patient, comming soon . . .\n\n\n";
     my $cook = -1;
     while($cook != 0){
